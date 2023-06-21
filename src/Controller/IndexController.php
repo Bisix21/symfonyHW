@@ -17,7 +17,7 @@ class IndexController extends AbstractController
     }
 
 	#[Route('/short')]
-	public function shortPlug()
+	public function shortPlug(): Response
 	{
 		return $this->render('index/plug.html.twig');
 	}
