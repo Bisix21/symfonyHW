@@ -23,6 +23,7 @@ if test -f "${target_path}/symfony.lock"; then
     rm -rf $install_path/docker*
 
     echo -e "${On_Green}   Generate .env.local file   ${NC}"
+    echo -e "${On_Green}   ${WORKDIR}   ${NC}"
 
     echo -e "# Copy from project env file" >> $install_path/.env.local
     cat ${WORKDIR}/.env.install >> $install_path/.env.local
