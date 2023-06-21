@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0d7faed-e537-4f36-8e91-6d56c4eea083" name="Changes" comment="installing symfony and created route &quot;/&quot;">
-      <change beforePath="$PROJECT_DIR$/.env.install.dist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="a0d7faed-e537-4f36-8e91-6d56c4eea083" name="Changes" comment="cleaning">
+      <change afterPath="$PROJECT_DIR$/templates/index/plug.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/symfonyHW.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/symfonyHW.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/IndexController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,9 +21,15 @@
       <executable path="composer" />
     </execution>
   </component>
+  <component name="PhpDebugGeneral" notify_if_session_was_finished_without_being_paused="false" />
   <component name="PhpServers">
     <servers>
-      <server host="localhost" id="f4fc001f-0891-40f8-827b-bf8677aa3ef2" name="home" />
+      <server host="symfony.hw" id="f4fc001f-0891-40f8-827b-bf8677aa3ef2" name="docker" use_path_mappings="true">
+        <path_mappings>
+          <mapping local-root="$PROJECT_DIR$" remote-root="srv/src/app" />
+          <mapping local-root="$PROJECT_DIR$/public" remote-root="/srv/src/app/public" />
+        </path_mappings>
+      </server>
     </servers>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP" />
@@ -34,18 +43,19 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Working Dir/symfonyHW",
+    "last_opened_file_path": "D:/Working Dir/symfonyHW/templates/index",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "settings.php.debug.servers",
+    "settings.editor.selected.configurable": "reference.webide.settings.project.settings.php.debug",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Working Dir\symfonyHW\templates\index" />
       <recent name="D:\Working Dir\symfonyHW" />
     </key>
   </component>
@@ -58,7 +68,7 @@
       <option name="presentableId" value="Default" />
       <updated>1687195607507</updated>
       <workItem from="1687195614306" duration="1246000" />
-      <workItem from="1687197517633" duration="7806000" />
+      <workItem from="1687197517633" duration="10206000" />
     </task>
     <task id="LOCAL-00001" summary="installing symfony and created route &quot;/&quot;">
       <created>1687356393073</created>
@@ -74,7 +84,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687356404143</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="cleaning">
+      <created>1687356557891</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1687356557891</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -93,6 +110,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="installing symfony and created route &quot;/&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="installing symfony and created route &quot;/&quot;" />
+    <MESSAGE value="cleaning" />
+    <option name="LAST_COMMIT_MESSAGE" value="cleaning" />
   </component>
 </project>
