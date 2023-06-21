@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0d7faed-e537-4f36-8e91-6d56c4eea083" name="Changes" comment="">
+    <list default="true" id="a0d7faed-e537-4f36-8e91-6d56c4eea083" name="Changes" comment="installing symfony and created route &quot;/&quot;">
       <change beforePath="$PROJECT_DIR$/.env.install.dist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/configs/php/symfony_install.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docker/configs/php/symfony_install.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,11 +58,41 @@
       <option name="presentableId" value="Default" />
       <updated>1687195607507</updated>
       <workItem from="1687195614306" duration="1246000" />
-      <workItem from="1687197517633" duration="7471000" />
+      <workItem from="1687197517633" duration="7806000" />
     </task>
+    <task id="LOCAL-00001" summary="installing symfony and created route &quot;/&quot;">
+      <created>1687356393073</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1687356393073</updated>
+    </task>
+    <task id="LOCAL-00002" summary="installing symfony and created route &quot;/&quot;">
+      <created>1687356404143</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1687356404143</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="installing symfony and created route &quot;/&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="installing symfony and created route &quot;/&quot;" />
   </component>
 </project>
