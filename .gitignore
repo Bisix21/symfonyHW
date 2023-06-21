@@ -19,3 +19,5 @@
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
 /logs/
+.env
+/docker/configs/php/.env.default
