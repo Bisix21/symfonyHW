@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Encode{% endblock %}
+
+{% block body %}
+    <style>
+        .example-wrapper {
+            margin: 1em auto;
+            max-width: 800px;
+            width: 95%;
+            font: 18px/1.5 sans-serif;
+        }
+
+        .example-wrapper code {
+            background: #F5F5F5;
+            padding: 2px 6px;
+        }
+    </style>
+
+    <div class="example-wrapper">
+        Enter link to short it:
+        <form action="/short/encode" method="post">
+            <label>Length
+                <input name="length" type="number" min="3" step="1" max="10" value="3">
+            </label>
+            <label> Url:
+                <input name="url" type="text">
+            </label>
+            <br>
+            <input type="submit" value="Short">
+        </form>
+    </div>
+    <hr>
+    test
+    {% for value in data %}
+       sdsd {{ value }}
+    {% endfor %}
+    <hr>
+
+{#    {% if data is not empty %}#}
+{#        <div class="example-wrapper">#}
+{#            <h1>Service is not working! Sorry :(</h1>#}
+{#            <h6>I'm joking ;) Today I have a weekend!!!</h6>#}
+{#            <p>#}
+{#                Your Code: {{ code }}, Your Link: {{ url }}#}
+{#            </p>#}
+{#            <a href="/">Home</a>#}
+{#        </div>#}
+{#    {% endif %}#}
+
+{% endblock %}
+
