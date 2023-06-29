@@ -8,17 +8,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class IndexController extends AbstractController
 {
-    #[Route('/', name: 'app_index')]
-    public function index(): Response
-    {
-        return $this->render('index/index.html.twig', [
-            'username' => $username ??  "Guest ",
-        ]);
-    }
-
-	#[Route('/short')]
-	public function shortPlug(): Response
+	#[Route('/', name: 'app_index')]
+	public function index(): Response
 	{
-		return $this->render('index/plug.html.twig');
+		return $this->render('index/index.html.twig', [
+			'username' => $username ?? "Guest "
+		]);
 	}
+
 }

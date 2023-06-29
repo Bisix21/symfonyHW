@@ -20,13 +20,8 @@
     <div class="example-wrapper">
         <h1>Hello {{ username }}! ✅</h1>
 
-        Enter link to short it:
-        <form action="/short" method="post">
-            <label> Url:
-                <input type="text">
-            </label>
-            <br>
-            <input type="submit" value="Short">
-        </form>
+        Select what you want:
+        <a href="/short">Encode</a> <br>
+        <a href="/deshort">Decode</a>
     </div>
 {% endblock %}

@@ -5,31 +5,49 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a0d7faed-e537-4f36-8e91-6d56c4eea083" name="Changes" comment="cleaning">
-      <change afterPath="$PROJECT_DIR$/.env.local" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Short.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/ShortRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/UrlShort/Commands/DecodeCommand.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/UrlShort/Commands/EncodeCommand.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/UrlShort/Decode.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/UrlShort/Encode.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/UrlShort/Interface/CommandInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/UrlShort/Interface/DBInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/UrlShort/Interface/DataBaseConnectionInterface.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/UrlShort/Interface/IUrlDecoder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/UrlShort/Interface/IUrlEncoder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/UrlShort/Repository/DM.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/UrlShort/Services/Printer.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/UrlShort/Services/Validator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.local" beforeDir="false" afterPath="$PROJECT_DIR$/.env.local" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/symfonyHW.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/symfonyHW.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/IndexController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index/plug.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index/plug.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index/plug.html.twig" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution>
       <executable path="composer" />
     </execution>
   </component>
-  <component name="PhpDebugGeneral" notify_if_session_was_finished_without_being_paused="false" />
+  <component name="PhpDebugGeneral" listening_started="true" notify_if_session_was_finished_without_being_paused="false" />
   <component name="PhpServers">
     <servers>
-      <server host="symfony.hw" id="f4fc001f-0891-40f8-827b-bf8677aa3ef2" name="docker" use_path_mappings="true">
+      <server host="localhost" id="f4fc001f-0891-40f8-827b-bf8677aa3ef2" name="docker" use_path_mappings="true">
         <path_mappings>
           <mapping local-root="$PROJECT_DIR$" remote-root="srv/src/app" />
-          <mapping local-root="$PROJECT_DIR$/public" remote-root="/srv/src/app/public" />
         </path_mappings>
       </server>
     </servers>
@@ -170,27 +188,41 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Working Dir/symfonyHW/templates/index",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.webide.settings.project.settings.php.debug",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Working Dir/symfonyHW/src&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;Symfony2.SettingsForm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
+    ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Working Dir\symfonyHW\src" />
       <recent name="D:\Working Dir\symfonyHW\templates\index" />
       <recent name="D:\Working Dir\symfonyHW" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Working Dir\symfonyHW\templates\encode" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="docker exec -it &quot;php_homework&quot; /bin/bash" />
+    </option>
   </component>
   <component name="RunManager">
     <configuration name="phpunit.xml.dist" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -209,6 +241,13 @@
       <workItem from="1687195614306" duration="1246000" />
       <workItem from="1687197517633" duration="10206000" />
       <workItem from="1687359259210" duration="2034000" />
+      <workItem from="1687363042733" duration="994000" />
+      <workItem from="1687364077503" duration="8494000" />
+      <workItem from="1687451856135" duration="12917000" />
+      <workItem from="1687637009295" duration="5773000" />
+      <workItem from="1687769837850" duration="9619000" />
+      <workItem from="1687964437577" duration="710000" />
+      <workItem from="1687967573916" duration="3228000" />
     </task>
     <task id="LOCAL-00001" summary="installing symfony and created route &quot;/&quot;">
       <created>1687356393073</created>
