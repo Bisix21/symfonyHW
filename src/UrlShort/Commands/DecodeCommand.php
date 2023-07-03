@@ -27,7 +27,7 @@ class DecodeCommand implements CommandInterface
 	/**
 	 * @throws NotSupported
 	 */
-	public function runAction(string $data): string
+	public function runAction(string|array $data): string
 	{
 		$this->issetCodeInDB($data);
 		return $this->decoder->decode($data);
