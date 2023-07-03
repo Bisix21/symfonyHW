@@ -7,7 +7,6 @@ use App\UrlShort\Interface\CommandInterface;
 use App\UrlShort\Repository\DM;
 use App\UrlShort\Services\Validator;
 use Doctrine\ORM\Exception\NotSupported;
-use Symfony\Component\HttpFoundation\Request;
 
 
 class DecodeCommand implements CommandInterface
@@ -28,17 +27,17 @@ class DecodeCommand implements CommandInterface
 	/**
 	 * @throws NotSupported
 	 */
-	public function runAction(Request $request): string
+	public function runAction(string $data): string
 	{
-		$this->issetCodeInDB($request);
-		return $this->decoder->decode($request->request->get('code'));
+		$this->issetCodeInDB($data);
+		return $this->decoder->decode($data);
 	}
 
 	/**
 	 * @throws NotSupported
 	 */
-	protected function issetCodeInDB(Request $request): void
+	protected function issetCodeInDB($data): void
 	{
-		$this->validator->isEmpty($this->record->read($request->request->get('code')));
+		$this->validator->isEmpty($this->record->read($data));
 	}
 }

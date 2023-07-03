@@ -23,21 +23,22 @@ class EncodeCommand implements CommandInterface
 	{
 	}
 
-	public function runAction(Request $request): array
+	public function runAction($data): array
 	{
-		$this->link = $request->request->get('url');
+//		dd($data);
+		$this->link = $data["url"];
 		//валідує лінк
 		$this->validator->link($this->link);
 		//записує в бд
-		return $this->save($request);
+		return $this->save($data);
 	}
 
 	/**
 	 * @throws ORMException
 	 */
-	protected function save(Request $request): array
+	protected function save($data): array
 	{
-		$this->encode->setLength($request->request->get('length') ?? 8);
+		$this->encode->setLength($data['length'] ?? 8);
 		$codeShort = $this->createArr($this->encode->encode($this->link), $this->link);
 		$this->record->saveToDb($codeShort);
 		return $codeShort;

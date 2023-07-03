@@ -7,5 +7,5 @@ use Symfony\Component\HttpFoundation\Request;
 
 interface CommandInterface
 {
-public function  runAction(Request $request);
+public function  runAction(string $data);
 }
