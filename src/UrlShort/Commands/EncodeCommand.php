@@ -25,7 +25,6 @@ class EncodeCommand implements CommandInterface
 
 	public function runAction(array|string $data): array
 	{
-//		dd($data);
 		$this->link = $data["url"];
 		//валідує лінк
 		$this->validator->link($this->link);
