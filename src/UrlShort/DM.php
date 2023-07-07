@@ -1,10 +1,9 @@
 <?php
 
-namespace App\UrlShort\Repository;
+namespace App\UrlShort;
 
 use App\Entity\Short;
 use App\Repository\ShortRepository;
-use App\UrlShort\Decode;
 use App\UrlShort\Interface\DBInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Exception\NotSupported;

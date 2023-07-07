@@ -17,6 +17,8 @@ class Short
 	private string $code;
 	#[ORM\Column(type: Types::TEXT, nullable: false)]
 	private string $url;
+	#[ORM\Column(type: Types::INTEGER, nullable: true, options: ['default' => "0"])]
+	private int $counter = 0;
 
 	/**
 	 * @return string
@@ -26,9 +28,25 @@ class Short
 		return $this->url;
 	}
 
+	/**
+	 * @param string $url
+	 */
+	public function setUrl(string $url): void
+	{
+		$this->url = $url;
+	}
+
 	public function getId(): int
 	{
 		return $this->id;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getCode(): string
+	{
+		return $this->code;
 	}
 
 	/**
@@ -40,18 +58,15 @@ class Short
 	}
 
 	/**
-	 * @param string $url
+	 * @return int
 	 */
-	public function setUrl(string $url): void
+	public function getCounter(): int
 	{
-		$this->url = $url;
+		return $this->counter;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function getCode(): string
+	public function incrementCounter(): void
 	{
-		return $this->code;
+		$this->counter++;
 	}
 }

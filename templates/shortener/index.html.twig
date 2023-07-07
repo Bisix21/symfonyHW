@@ -3,40 +3,8 @@
 {% block title %}Url Short{% endblock %}
 
 {% block body %}
-    <style>
-        .example-wrapper {
-            margin: 1em auto;
-            max-width: 800px;
-            width: 95%;
-            font: 18px/1.5 sans-serif;
-        }
-
-        .example-wrapper code {
-            background: #F5F5F5;
-            padding: 2px 6px;
-        }
-    </style>
-
-    <div class="example-wrapper">
-
         Select what you want:
-        <form action="{{ path('app_shortener_encode') }}" method="POST">
-            <label for="url">Url</label>
-            <input id="url" type="text" name="url">
-            <label for="length">Length</label>
-            <input id="length" type="number" step="1" min="3" max="10" value="3" name="length">
-            <br>
-            <button type="submit"> Encode url</button>
-        </form>
-        <br>
-        <br>
-        <br>
-        <br>
-        <form action="{{ path('app_shortener_decode') }}" method="POST">
-            <label for="code">Code</label>
-            <input id="code" type="text" name="code">
-            <br>
-            <button type="submit"> Decode url</button>
-        </form>
-    </div>
+    <a href="{{ path('_encode_page') }}">Encode Url</a>
+    <a href="{{ path('_decode_page') }}">Decode Url</a>
+    <a href="{{ path('_all_urls') }}">All Urls</a>
 {% endblock %}

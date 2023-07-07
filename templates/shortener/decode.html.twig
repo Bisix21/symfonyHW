@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Url Short{% endblock %}
+{% block breadcrumbs %}
+    {{ parent() }}-> <a href="{{ path('_decode_page') }}">Decode Url</a>
+{% endblock %}
+{% block body %}
+    <form action="{{ path('_decode_form') }}" method="POST">
+        <label for="code">Code</label>
+        <input id="code" type="text" name="code">
+        <br>
+        <button type="submit"> Decode url</button>
+    </form>
+{% endblock %}

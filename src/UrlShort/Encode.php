@@ -15,7 +15,7 @@ class Encode implements IUrlEncoder
 	 */
 	public function encode(string $url): string
 	{
-		return substr(md5($url), 0, $this->length);
+		return substr(rand(1, 1000) . md5($url), 0, $this->length);
 	}
 
 	/**

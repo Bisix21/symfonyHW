@@ -2,12 +2,11 @@
 
 namespace App\UrlShort\Commands;
 
+use App\UrlShort\DM;
 use App\UrlShort\Encode;
 use App\UrlShort\Interface\CommandInterface;
-use App\UrlShort\Repository\DM;
 use App\UrlShort\Services\Validator;
 use Doctrine\ORM\Exception\ORMException;
-use Symfony\Component\HttpFoundation\Request;
 
 
 class EncodeCommand implements CommandInterface

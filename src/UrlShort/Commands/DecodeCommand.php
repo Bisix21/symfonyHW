@@ -3,8 +3,8 @@
 namespace App\UrlShort\Commands;
 
 use App\UrlShort\Decode;
+use App\UrlShort\DM;
 use App\UrlShort\Interface\CommandInterface;
-use App\UrlShort\Repository\DM;
 use App\UrlShort\Services\Validator;
 use Doctrine\ORM\Exception\NotSupported;
 
