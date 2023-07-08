@@ -28,6 +28,18 @@
 {% block breadcrumbs %}
     <a href="{{ path('app_shortener') }}">Home</a>
 {% endblock %}
+<br>
+{% if not app.user %}
+    <a href="{{ path('app_login') }}">Login</a>
+    <a href="{{ path('app_register') }}">Register</a>
+    <p>login: tester@gmail.com</p>
+    <p>pass: 1111</p>
+{% endif %}
+{% if app.user %}
+    <div class="mb-3">
+        You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+    </div>
+{% endif %}
 <div class="example-wrapper">
     {% block body %}{% endblock %}
 </div>
