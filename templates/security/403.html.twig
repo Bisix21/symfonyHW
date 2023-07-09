@@ -1,0 +1,8 @@
+{% extends "base.html.twig" %}
+{% block title %}
+    {{ parent() }} :: 403
+{% endblock %}
+{% block body %}
+    <h1>Access denied! Contact to administration.</h1>
+   <p>Back to <a href="{{ path('app_shortener') }}"> home</a></p>
+{% endblock %}

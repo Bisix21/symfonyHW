@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Short;
-use App\Repository\ShortRepository;
+use App\Entity\CodeUrlPair;
+use App\Repository\CodeUrlPairRepository;
 use App\Service\ShortenerService;
 use App\UrlShort\Commands\DecodeCommand;
 use App\UrlShort\Commands\EncodeCommand;
@@ -30,9 +30,9 @@ class ShortenerController extends AbstractController
 	}
 
 	#[Route('/urls', name: '_all_urls')]
-	public function urlsList(ShortRepository $shortRepository): Response
+	public function urlsList(CodeUrlPairRepository $codeUrlPair): Response
 	{
-		$allSites = $shortRepository->findAll();
+		$allSites = $codeUrlPair->findAll();
 		return $this->render('shortener/list_of_sites.html.twig', [
 			'allSites' => $allSites
 		]);
@@ -70,10 +70,13 @@ class ShortenerController extends AbstractController
 	 * @throws NotSupported
 	 */
 	#[Route('/decode_form', name: "_decode_form", methods: "POST")]
-	public function decode(Request $request, DecodeCommand $decode): JsonResponse
+	public function decode(Request $request, DecodeCommand $decode): Response
 	{
 		$this->setData($decode->runAction($request->request->get('code')));
-		return $this->json($this->getData(), 200, ["Content-type" => "application/json"]);
+		return $this->render('shortener/_decode_result.html.twig', [
+			'url' => $this->getData()
+		]);
+//		return $this->json($this->getData(), 200, ["Content-type" => "application/json"]);
 	}
 
 	/**
@@ -93,11 +96,11 @@ class ShortenerController extends AbstractController
 	}
 
 	#[Route('/r/{code}', name: "_redirect", requirements: ['code' => "\w{3,10}"])]
-	public function redirectAction(Short $short, ShortenerService $shortenerService): RedirectResponse
+	public function redirectAction(CodeUrlPair $codeUrlPair, ShortenerService $shortenerService): RedirectResponse
 	{
-		$url = $short->getUrl();
-		$shortenerService->incrementCount($short);
+		$url = $codeUrlPair->getUrl();
+		$shortenerService->incrementCount($codeUrlPair);
 		//TODO change '/' to $url for redirect to site encoded in code
-		return $this->redirect('/');
+		return $this->redirectToRoute('_all_urls');
 	}
 }

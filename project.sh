@@ -2,6 +2,7 @@
 
 install=false
 
+# shellcheck disable=SC2039
 while [[ "$#" -gt 0 ]]; do
     case $1 in
         -i|--install) install=true; shift ;;
@@ -10,6 +11,7 @@ while [[ "$#" -gt 0 ]]; do
     esac
     shift
 done
+# shellcheck disable=SC2039
 if [[ "$install" == true ]]; then
       echo 'Installation';
       docker-compose --env-file .env.install up --build;

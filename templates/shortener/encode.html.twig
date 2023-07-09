@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Url Short{% endblock %}
+{% block title %}
+    {{ parent() }} :: Encode
+{% endblock %}
 {% block breadcrumbs %}
     {{ parent() }}-> <a href="{{ path('_encode_page') }}">Encode Url</a>
 {% endblock %}

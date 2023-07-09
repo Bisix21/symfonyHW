@@ -2,10 +2,9 @@
 
 namespace App\UrlShort;
 
-use App\Entity\Short;
-use App\Repository\ShortRepository;
+use App\Entity\CodeUrlPair;
+use App\Repository\CodeUrlPairRepository;
 use App\UrlShort\Interface\DBInterface;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Exception\NotSupported;
 use Doctrine\ORM\Exception\ORMException;
 use InvalidArgumentException;
@@ -13,9 +12,9 @@ use InvalidArgumentException;
 class DM implements DBInterface
 {
 	public function __construct(
-		protected Decode        $decode,
-		protected Short         $short,
-		protected EntityManagerInterface $entityManager,
+		protected Decode                 $decode,
+		protected CodeUrlPair            $codeUrlPair,
+		protected CodeUrlPairRepository $codeUrlPairRepository
 	)
 	{
 	}
@@ -25,14 +24,13 @@ class DM implements DBInterface
 	 */
 	public function saveToDb($data): void
 	{
-		$shortRep = $this->entityManager->getRepository(Short::class);
-		if (!$shortRep->issetCode($data['code'])) {
+		if (!$this->codeUrlPairRepository->issetCode($data['code'])) {
 			throw new InvalidArgumentException("You have same record: {$data['code']} => {$data['url']}");
 		}
-		$this->short->setCode($data['code']);
-		$this->short->setUrl($data['url']);
-		$this->entityManager->persist($this->short);
-		$this->entityManager->flush();
+		$this->codeUrlPair->setCode($data['code']);
+		$this->codeUrlPair->setUrl($data['url']);
+		$this->codeUrlPair->setUserId($data['userId']);
+		$this->codeUrlPairRepository->save($this->codeUrlPair, true);
 	}
 
 	/**
@@ -40,9 +38,7 @@ class DM implements DBInterface
 	 */
 	public function read(string $code): string
 	{
-		/** @var ShortRepository $shortRep */
-		$shortRep = $this->entityManager->getRepository(Short::class);
-		$short = $shortRep->getUrlByCode($code);
+		$short = $this->codeUrlPairRepository->getUrlByCode($code);
 		if (is_null($short)) {
 			throw new InvalidArgumentException(" Undefined code $code");
 		}

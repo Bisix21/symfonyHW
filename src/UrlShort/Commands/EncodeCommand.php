@@ -7,6 +7,8 @@ use App\UrlShort\Encode;
 use App\UrlShort\Interface\CommandInterface;
 use App\UrlShort\Services\Validator;
 use Doctrine\ORM\Exception\ORMException;
+use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 
 class EncodeCommand implements CommandInterface
@@ -18,6 +20,7 @@ class EncodeCommand implements CommandInterface
 		protected Encode    $encode,
 		protected DM        $record,
 		protected Validator $validator,
+		protected Security $security
 	)
 	{
 	}
@@ -47,6 +50,12 @@ class EncodeCommand implements CommandInterface
 		return [
 			'code' => $code,
 			'url' => $url,
+			'userId' => $this->getUserId()
 		];
+	}
+
+	public function getUserId()
+	{
+		return $this->security->getUser();
 	}
 }

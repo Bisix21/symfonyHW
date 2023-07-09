@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\ShortRepository;
+use App\Repository\CodeUrlPairRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ShortRepository::class)]
-class Short
+#[ORM\Entity(repositoryClass: CodeUrlPairRepository::class)]
+class CodeUrlPair
 {
 	#[ORM\Id]
 	#[ORM\Column(type: Types::INTEGER)]
@@ -19,6 +19,27 @@ class Short
 	private string $url;
 	#[ORM\Column(type: Types::INTEGER, nullable: true, options: ['default' => "0"])]
 	private int $counter = 0;
+
+	#[ORM\ManyToOne(inversedBy: 'codeUrlPairs')]
+	#[ORM\JoinColumn(nullable: false)]
+	private ?User $userId = null;
+
+	public function getId(): ?int
+	{
+		return $this->id;
+	}
+
+	public function getUserId(): ?User
+	{
+		return $this->userId;
+	}
+
+	public function setUserId(?User $userId): static
+	{
+		$this->userId = $userId;
+
+		return $this;
+	}
 
 	/**
 	 * @return string
@@ -34,11 +55,6 @@ class Short
 	public function setUrl(string $url): void
 	{
 		$this->url = $url;
-	}
-
-	public function getId(): int
-	{
-		return $this->id;
 	}
 
 	/**

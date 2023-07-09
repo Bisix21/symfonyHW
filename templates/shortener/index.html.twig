@@ -3,8 +3,11 @@
 {% block title %}Url Short{% endblock %}
 
 {% block body %}
-        Select what you want:
+    Select what you want:
     <a href="{{ path('_encode_page') }}">Encode Url</a>
     <a href="{{ path('_decode_page') }}">Decode Url</a>
     <a href="{{ path('_all_urls') }}">All Urls</a>
+    <br>
+    //TODO make dropdown list for select code from available codes <br>
+    //TODO change exception to error page 403
 {% endblock %}

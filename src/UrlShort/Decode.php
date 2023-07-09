@@ -2,16 +2,15 @@
 
 namespace App\UrlShort;
 
-use App\Entity\Short;
+use App\Repository\CodeUrlPairRepository;
 use App\UrlShort\Interface\IUrlDecoder;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Exception\NotSupported;
 
 
 class Decode implements IUrlDecoder
 {
 	public function __construct(
-		protected EntityManagerInterface $short,
+		protected CodeUrlPairRepository $codeUrlPairRepository
 	)
 	{
 	}
@@ -27,10 +26,9 @@ class Decode implements IUrlDecoder
 	/**
 	 * @throws NotSupported
 	 */
-	protected function decodeFromDM(string $code)
+	protected function decodeFromDM(string $code): string
 	{
-		$shortRep = $this->short->getRepository(Short::class);
-		$short = $shortRep->getUrlByCode($code);
+		$short = $this->codeUrlPairRepository->getUrlByCode($code);
 		return $short->getUrl();
 	}
 }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -28,6 +30,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    #[ORM\OneToMany(mappedBy: 'userId', targetEntity: CodeUrlPair::class)]
+    private Collection $codeUrlPairs;
+
+    public function __construct()
+    {
+        $this->codeUrlPairs = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -97,5 +107,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection<int, CodeUrlPair>
+     */
+    public function getCodeUrlPairs(): Collection
+    {
+        return $this->codeUrlPairs;
+    }
+
+    public function addCodeUrlPair(CodeUrlPair $codeUrlPair): static
+    {
+        if (!$this->codeUrlPairs->contains($codeUrlPair)) {
+            $this->codeUrlPairs->add($codeUrlPair);
+            $codeUrlPair->setUserId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCodeUrlPair(CodeUrlPair $codeUrlPair): static
+    {
+        if ($this->codeUrlPairs->removeElement($codeUrlPair)) {
+            // set the owning side to null (unless already changed)
+            if ($codeUrlPair->getUserId() === $this) {
+                $codeUrlPair->setUserId(null);
+            }
+        }
+
+        return $this;
     }
 }
