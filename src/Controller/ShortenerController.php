@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\CodeUrlPair;
 use App\Enum\RolesEnum;
+use App\Form\DecodeFormType;
+use App\Form\EncodeFormType;
 use App\Repository\CodeUrlPairRepository;
 use App\Repository\UserRepository;
 use App\Service\ShortenerService;
@@ -29,7 +31,7 @@ class ShortenerController extends AbstractController
 	{
 		if ($this->isGranted(RolesEnum::Admin)) {
 			$allSites = $codeUrlPair->findAll();
-		}else{
+		} else {
 			$allSites = $codeUrlPair->findBy(['userId' => $this->getUser()->getUserIdentifier()]);
 		}
 		return $this->render('shortener/list_of_sites.html.twig', [
@@ -37,45 +39,42 @@ class ShortenerController extends AbstractController
 		]);
 	}
 
-	#[Route('/encode', name: "_encode_page")]
-	public function encodePage(): Response
-	{
-		return $this->render('shortener/encode.html.twig');
-	}
-
-	#[Route('/decode', name: "_decode_page")]
-	public function decodePage(): Response
-	{
-		return $this->render('shortener/decode.html.twig');
-	}
-
-	#[Route('/encode_form', name: "_encode_form", methods: "POST")]
+	#[Route('/encode', name: "_encode_page", methods: ["GET", "POST"])]
 	public function encode(Request $request, EncodeCommand $encode): Response
 	{
-		$encode->runAction($this->prepareDataFromRequest($request));
-		return $this->redirectToRoute('_all_urls');
-	}
+		$urlCodePair = new CodeUrlPair();
+		$form = $this->createForm(EncodeFormType::class, $urlCodePair);
+		$form->handleRequest($request);
 
-	protected function prepareDataFromRequest(Request $request): array
-	{
-		return [
-			'url' => $request->request->get('url'),
-			'length' => $request->request->get('length'),
-		];
+		if ($form->isSubmitted() && $form->isValid()) {
+			$encode->runAction($form->get('url')->getData());
+			return $this->redirectToRoute('_all_urls');
+		}
+
+		return $this->render('shortener/encode.html.twig', [
+			'form' => $form->createView(),
+		]);
 	}
 
 	/**
 	 * @throws NotSupported
 	 */
-	#[Route('/decode_form', name: "_decode_form", methods: "POST")]
-	public function decode(Request $request, DecodeCommand $decode): Response
+	#[Route('/decode', name: "_decode_page", methods: ["GET", "POST"])]
+	public function decode(DecodeCommand $decode, Request $request): Response
 	{
-		return $this->render('shortener/_decode_result.html.twig', [
-			'url' => $decode->runAction($request->request->get('code'))
+		$form = $this->createForm(DecodeFormType::class);
+		$form->handleRequest($request);
+		if ($form->isSubmitted() && $form->isValid()) {
+			return $this->render('shortener/_decode_result.html.twig', [
+				'url' => $decode->runAction($form->get('code')->getData())
+			]);
+		}
+		return $this->render('shortener/decode.html.twig', [
+			'form' => $form->createView()
 		]);
 	}
 
-	#[Route('/r/{code}', name: "_redirect", requirements: ['code' => "\w{3,10}"])]
+	#[Route('/r/{code}', name: "_redirect", requirements: ['code' => "\w{8}"])]
 	public function redirectAction(CodeUrlPair $codeUrlPair, ShortenerService $shortenerService): RedirectResponse
 	{
 		$url = $codeUrlPair->getUrl();
