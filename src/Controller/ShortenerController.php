@@ -3,13 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\CodeUrlPair;
+use App\Enum\RolesEnum;
 use App\Repository\CodeUrlPairRepository;
+use App\Repository\UserRepository;
 use App\Service\ShortenerService;
 use App\UrlShort\Commands\DecodeCommand;
 use App\UrlShort\Commands\EncodeCommand;
 use Doctrine\ORM\Exception\NotSupported;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,12 +18,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ShortenerController extends AbstractController
 {
-	/**
-	 * @var array|string
-	 *
-	 */
-	private array|string $data = [];
-
 	#[Route('/', name: 'app_shortener')]
 	public function index(): Response
 	{
@@ -30,9 +25,13 @@ class ShortenerController extends AbstractController
 	}
 
 	#[Route('/urls', name: '_all_urls')]
-	public function urlsList(CodeUrlPairRepository $codeUrlPair): Response
+	public function urlsList(CodeUrlPairRepository $codeUrlPair, UserRepository $userRepository): Response
 	{
-		$allSites = $codeUrlPair->findAll();
+		if ($this->isGranted(RolesEnum::Admin)) {
+			$allSites = $codeUrlPair->findAll();
+		}else{
+			$allSites = $codeUrlPair->findBy(['userId' => $this->getUser()->getUserIdentifier()]);
+		}
 		return $this->render('shortener/list_of_sites.html.twig', [
 			'allSites' => $allSites
 		]);
@@ -53,9 +52,8 @@ class ShortenerController extends AbstractController
 	#[Route('/encode_form', name: "_encode_form", methods: "POST")]
 	public function encode(Request $request, EncodeCommand $encode): Response
 	{
-		$this->data = $encode->runAction($this->prepareDataFromRequest($request));
+		$encode->runAction($this->prepareDataFromRequest($request));
 		return $this->redirectToRoute('_all_urls');
-//		return $this->json($this->data, 200, ["Content-Type" => "application/json"]);
 	}
 
 	protected function prepareDataFromRequest(Request $request): array
@@ -72,27 +70,9 @@ class ShortenerController extends AbstractController
 	#[Route('/decode_form', name: "_decode_form", methods: "POST")]
 	public function decode(Request $request, DecodeCommand $decode): Response
 	{
-		$this->setData($decode->runAction($request->request->get('code')));
 		return $this->render('shortener/_decode_result.html.twig', [
-			'url' => $this->getData()
+			'url' => $decode->runAction($request->request->get('code'))
 		]);
-//		return $this->json($this->getData(), 200, ["Content-type" => "application/json"]);
-	}
-
-	/**
-	 * @return string|array
-	 */
-	public function getData(): string|array
-	{
-		return $this->data;
-	}
-
-	/**
-	 * @param string|array $data
-	 */
-	public function setData(string|array $data): void
-	{
-		$this->data = $data;
 	}
 
 	#[Route('/r/{code}', name: "_redirect", requirements: ['code' => "\w{3,10}"])]
@@ -100,7 +80,7 @@ class ShortenerController extends AbstractController
 	{
 		$url = $codeUrlPair->getUrl();
 		$shortenerService->incrementCount($codeUrlPair);
-		//TODO change '/' to $url for redirect to site encoded in code
+		// change '_all_urls' to $url for redirect to site encoded in code
 		return $this->redirectToRoute('_all_urls');
 	}
 }

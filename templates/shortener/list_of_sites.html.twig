@@ -4,28 +4,32 @@
     {{ parent() }} :: List of Sites
 {% endblock %}
 {% block breadcrumbs %}
-    {{ parent() }}-> <a href="{{ path('_all_urls') }}">All sites</a>
+    {{ parent() }}-> All sites
 {% endblock %}
 {% block body %}
-    <table>
-        <tr>
-            <th>
-                All sites
-            </th>
-        </tr>
-        <tr>
-            <td>#id</td>
-            <td>code</td>
-            <td>url</td>
-            <td>counter</td>
-        </tr>
-        {% for site in allSites %}
+    {% if allSites|length>=1 %}
+        <table>
             <tr>
-                <td>{{ site.id }}</td>
-                <td><a href="/r/{{ site.code }}">/r/{{ site.code }}</a></td>
-                <td><a href="{{ site.url }}" target="_blank">{{ site.url }}</a></td>
-                <td>{{ site.counter }}</td>
+                <th>
+                    All sites
+                </th>
             </tr>
-        {% endfor %}
-    </table>
+            <tr>
+                <td>#id</td>
+                <td>code</td>
+                <td>url</td>
+                <td>counter</td>
+            </tr>
+            {% for site in allSites %}
+                <tr>
+                    <td>{{ site.id }}</td>
+                    <td><a href="/r/{{ site.code }}">/r/{{ site.code }}</a></td>
+                    <td><a href="{{ site.url }}" target="_blank">{{ site.url }}</a></td>
+                    <td>{{ site.counter }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else%}
+        You not have record!
+    {% endif %}
 {% endblock %}

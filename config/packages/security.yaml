@@ -30,7 +30,6 @@ security:
   # Note: Only the *first* access control that matches will be used
   access_control:
     - { path: ^/admin, roles: ROLE_ADMIN }
-    - { path: ^/urls, roles: ROLE_ADMIN }
     - { path: ^/encode, roles: ROLE_USER }
     - { path: ^/decode, roles: ROLE_USER }
 

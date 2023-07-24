@@ -7,7 +7,6 @@ use InvalidArgumentException;
 class Validator
 {
 	protected bool $status = true;
-	protected mixed $allCommands;
 
 	public function link($link): bool|int
 	{

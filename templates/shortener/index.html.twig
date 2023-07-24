@@ -6,8 +6,9 @@
     Select what you want:
     <a href="{{ path('_encode_page') }}">Encode Url</a>
     <a href="{{ path('_decode_page') }}">Decode Url</a>
-    <a href="{{ path('_all_urls') }}">All Urls</a>
+    {% if app.user %}
+        <a href="{{ path('_all_urls') }}">All Urls</a>
+    {% endif %}
     <br>
-    //TODO make dropdown list for select code from available codes <br>
-    //TODO change exception to error page 403
+    //TODO make dropdown list for select code from available codes
 {% endblock %}

@@ -24,6 +24,7 @@ class DM implements DBInterface
 	 */
 	public function saveToDb($data): void
 	{
+		// if we use random code for one same url than if-statement not working.
 		if (!$this->codeUrlPairRepository->issetCode($data['code'])) {
 			throw new InvalidArgumentException("You have same record: {$data['code']} => {$data['url']}");
 		}

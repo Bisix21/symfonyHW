@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\RolesEnum;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -14,128 +15,133 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+	#[ORM\Id]
+	#[ORM\GeneratedValue]
+	#[ORM\Column]
+	private ?int $id = null;
 
-    #[ORM\Column(length: 180, unique: true)]
-    private ?string $email = null;
+	#[ORM\Column(length: 180, unique: true)]
+	private ?string $email = null;
 
-    #[ORM\Column]
-    private array $roles = [];
+	#[ORM\Column]
+	private array $roles = [];
 
-    /**
-     * @var string The hashed password
-     */
-    #[ORM\Column]
-    private ?string $password = null;
+	/**
+	 * @var string The hashed password
+	 */
+	#[ORM\Column]
+	private ?string $password = null;
 
-    #[ORM\OneToMany(mappedBy: 'userId', targetEntity: CodeUrlPair::class)]
-    private Collection $codeUrlPairs;
+	#[ORM\OneToMany(mappedBy: 'userId', targetEntity: CodeUrlPair::class)]
+	private Collection $codeUrlPairs;
 
-    public function __construct()
-    {
-        $this->codeUrlPairs = new ArrayCollection();
-    }
+	public function __construct()
+	{
+		$this->codeUrlPairs = new ArrayCollection();
+	}
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+	/**
+	 * A visual identifier that represents this user.
+	 *
+	 * @see UserInterface
+	 */
+	public function getUserIdentifier(): string
+	{
+		return (string)$this->getId();
+	}
 
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
+	public function getId(): ?int
+	{
+		return $this->id;
+	}
 
-    public function setEmail(string $email): static
-    {
-        $this->email = $email;
+	public function getUserEmail(): string
+	{
+		return (string)$this->getEmail();
+	}
 
-        return $this;
-    }
+	public function getEmail(): ?string
+	{
+		return $this->email;
+	}
 
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
-    public function getUserIdentifier(): string
-    {
-        return (string) $this->email;
-    }
+	public function setEmail(string $email): static
+	{
+		$this->email = $email;
 
-    /**
-     * @see UserInterface
-     */
-    public function getRoles(): array
-    {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+		return $this;
+	}
 
-        return array_unique($roles);
-    }
+	/**
+	 * @see UserInterface
+	 */
+	public function getRoles(): array
+	{
+		$roles = $this->roles;
+		// guarantee every user at least has ROLE_USER
+		$roles[] = RolesEnum::User;
 
-    public function setRoles(array $roles): static
-    {
-        $this->roles = $roles;
+		return array_unique($roles);
+	}
 
-        return $this;
-    }
+	public function setRoles(array $roles): static
+	{
+		$this->roles = $roles;
 
-    /**
-     * @see PasswordAuthenticatedUserInterface
-     */
-    public function getPassword(): string
-    {
-        return $this->password;
-    }
+		return $this;
+	}
 
-    public function setPassword(string $password): static
-    {
-        $this->password = $password;
+	/**
+	 * @see PasswordAuthenticatedUserInterface
+	 */
+	public function getPassword(): string
+	{
+		return $this->password;
+	}
 
-        return $this;
-    }
+	public function setPassword(string $password): static
+	{
+		$this->password = $password;
 
-    /**
-     * @see UserInterface
-     */
-    public function eraseCredentials(): void
-    {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
-    }
+		return $this;
+	}
 
-    /**
-     * @return Collection<int, CodeUrlPair>
-     */
-    public function getCodeUrlPairs(): Collection
-    {
-        return $this->codeUrlPairs;
-    }
+	/**
+	 * @see UserInterface
+	 */
+	public function eraseCredentials(): void
+	{
+		// If you store any temporary, sensitive data on the user, clear it here
+		// $this->plainPassword = null;
+	}
 
-    public function addCodeUrlPair(CodeUrlPair $codeUrlPair): static
-    {
-        if (!$this->codeUrlPairs->contains($codeUrlPair)) {
-            $this->codeUrlPairs->add($codeUrlPair);
-            $codeUrlPair->setUserId($this);
-        }
+	/**
+	 * @return Collection<int, CodeUrlPair>
+	 */
+	public function getCodeUrlPairs(): Collection
+	{
+		return $this->codeUrlPairs;
+	}
 
-        return $this;
-    }
+	public function addCodeUrlPair(CodeUrlPair $codeUrlPair): static
+	{
+		if (!$this->codeUrlPairs->contains($codeUrlPair)) {
+			$this->codeUrlPairs->add($codeUrlPair);
+			$codeUrlPair->setUserId($this);
+		}
 
-    public function removeCodeUrlPair(CodeUrlPair $codeUrlPair): static
-    {
-        if ($this->codeUrlPairs->removeElement($codeUrlPair)) {
-            // set the owning side to null (unless already changed)
-            if ($codeUrlPair->getUserId() === $this) {
-                $codeUrlPair->setUserId(null);
-            }
-        }
+		return $this;
+	}
 
-        return $this;
-    }
+	public function removeCodeUrlPair(CodeUrlPair $codeUrlPair): static
+	{
+		if ($this->codeUrlPairs->removeElement($codeUrlPair)) {
+			// set the owning side to null (unless already changed)
+			if ($codeUrlPair->getUserId() === $this) {
+				$codeUrlPair->setUserId(null);
+			}
+		}
+
+		return $this;
+	}
 }
