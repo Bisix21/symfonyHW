@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\CodeUrlPair;
 use App\Enum\RolesEnum;
+use App\Factory\UserFactory;
 use App\Form\DecodeFormType;
 use App\Form\EncodeFormType;
 use App\Repository\CodeUrlPairRepository;
@@ -21,8 +22,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class ShortenerController extends AbstractController
 {
 	#[Route('/', name: 'app_shortener')]
-	public function index(): Response
+	public function index(UserFactory $factory): Response
 	{
+		$factory->createUsers(
+			'user@gmail.com',
+		'1111');
+		$factory->createUsers(
+			'admin@gmail.com',
+			'1111',
+			[RolesEnum::Admin]
+		);
 		return $this->render('shortener/index.html.twig');
 	}
 
